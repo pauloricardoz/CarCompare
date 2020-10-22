@@ -8,11 +8,9 @@ export function apiMarca(tipo) {
   if (tipo !== 'carros' && tipo !== 'motos' && tipo !== 'caminhoes') {
     tipo = 'carros'
   }
-  console.log('TIPO',tipo)
   return fetch(`https://parallelum.com.br/fipe/api/v1/${tipo}/marcas`)
     .then(handleErrors)
     .then(e => e.json())
-    .then(e => { console.log(e); return e; })
     .catch(error => console.log(error));
 };
 
