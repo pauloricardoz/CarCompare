@@ -4,10 +4,12 @@ import Card from './components/cards/card';
 import Cards from './components/cards/cards';
 import Selections from './components/selections';
 import Context from './context/context';
-import {  } from 'react-bootstrap'
+import { Alert, Button } from 'react-bootstrap';
+import ButtomList from './components/buttomList';
 
 function App() {
   const { valor, autos, setAutos, exist, setExist } = useContext(Context);
+  const [showList, setShowList] = useState(false);
   const saved = localStorage.getItem('autos');
   useEffect(() => {
     if (saved) {
@@ -16,9 +18,7 @@ function App() {
   }, []);
   useEffect(() => {
     if (exist) {
-      setTimeout(() =>
-        setExist(false)
-        , 2000);
+      setTimeout(() => setExist(false), 2000);
     }
   }, [exist]);
   let valores = null;
@@ -29,11 +29,13 @@ function App() {
         <h1>Comparação de carros na tabela FIPE</h1>
       </header>
       <Selections />
-      <div className="localizado">
-        {valor ? <Card data={valor} /> : null}
-      </div>
-      {exist ? <strong className="exist">Já existe</strong> : null}
-      {!autos ? null : <Cards />}
+      <div className="localizado">{valor ? <Card data={valor} /> : null}</div>
+      {exist ? (
+        <Alert className="exist" variant={'danger'}>
+          Já existe!
+        </Alert>
+      ) : null}
+      <ButtomList />
     </div>
   );
 }

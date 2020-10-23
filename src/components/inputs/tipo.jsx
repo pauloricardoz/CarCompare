@@ -34,7 +34,9 @@ export default function Test() {
       setAno({ ...modelo, value: '' });
       setAnoOption(null);
     }
-    if (tipo.value !== '') apiMarca(tipo.value).then((e) => setMarcaOption(e));
+    if (tipo.value !== '' && typeof tipo.value === 'string') {
+      apiMarca(tipo.value).then((e) => setMarcaOption(e));
+    }
   }, [tipo]);
   return (
     <Dropdown className="inputs">
@@ -46,12 +48,10 @@ export default function Test() {
         name="tipo"
         id="tipo"
         onClick={(e) => {
-          console.log(e);
           setMarcaOption(null);
           updateState(e.target.outerText, setTipo, tipoOption);
           setTextBtn(`${e.target.outerText}`);
         }}
-        
       >
         {tipoOption.map((e) => (
           <Dropdown.Item value={e} key={e}>

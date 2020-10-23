@@ -4,8 +4,6 @@ import Context from '../../context/context';
 import { apiModelos } from '../../services/apiFipe';
 
 function updateState(event, stateFunc, option) {
-  console.log('event', event);
-  console.log('option', option);
   let codigo = option.find((opt) => opt.nome === event);
   if (codigo) codigo = codigo.codigo;
   stateFunc((state) => ({ ...state, value: event, codigo }));
@@ -21,12 +19,16 @@ export default function Marca() {
     if (!marcaOption) return null;
   }, [marcaOption]);
   useEffect(async () => {
-    if (marca.value === '') {
+    console.log(typeof marca.value);
+    if (marca.value === '' || typeof marca.value !== 'string') {
       await setModelo({ ...modelo, value: '' });
       await setModeloOption(null);
       return null;
     }
-    apiModelos(tipo.value, marca.codigo).then((e) => setModeloOption(e.modelos));
+    apiModelos(tipo.value, marca.codigo).then((e) => {
+      console.log(typeof setModeloOption);
+      setModeloOption(e.modelos);
+    });
     return () => {
       setModelo({ ...modelo, value: '' });
       setModeloOption(null);

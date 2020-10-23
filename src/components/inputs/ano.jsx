@@ -3,8 +3,12 @@ import { Dropdown } from 'react-bootstrap';
 import Context from '../../context/context';
 import { apiAnos, apiMarca, apiModelos, apiValor } from '../../services/apiFipe';
 
+function cleanInput(context) {
+  const { setValor } = context;
+  setValor(null);
+}
 function updateState(event, stateFunc) {
-  stateFunc((state) => event.target.attributes[0].nodeValue);
+  stateFunc((state) => event.target.attributes[0].value);
 }
 
 export default function Ano() {
@@ -13,11 +17,13 @@ export default function Ano() {
 
   useEffect(() => setTextBtn('Ano:'), [modelo]);
   useEffect(() => {
-    if (ano.value === '') {
+    cleanInput({ setValor });
+    if (ano.value === '' || typeof ano !== 'string') {
       setValor(null);
       return null;
     }
     apiValor(tipo.value, marca.codigo, modelo.codigo, ano).then((e) => {
+      console.log(typeof setValor);
       setValor(e);
     });
   }, [ano]);
