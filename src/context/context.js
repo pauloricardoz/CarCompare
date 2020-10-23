@@ -11,26 +11,37 @@ export function Provider({ children }) {
   const [marcaOption, setMarcaOption] = useState(null);
   const [modeloOption, setModeloOption] = useState(null);
   const [anoOption, setAnoOption] = useState(null);
-  const [autos, setAutos] = useState([])
-  const [exist, setExist] = useState(false)
+  const [autos, setAutos] = useState([]);
+  const [exist, setExist] = useState(false);
+  const [showList, setShowList] = useState(false);
+  const [showTable, setShowTable] = useState(false);
   const context = {
-    tipo, setTipo,
-    marca, setMarca,
-    modelo, setModelo,
-    ano, setAno,
-    valor, setValor,
-    marcaOption, setMarcaOption,
-    modeloOption, setModeloOption,
-    anoOption, setAnoOption,
-    autos, setAutos,
-    exist, setExist
-  }
+    tipo,
+    setTipo,
+    marca,
+    setMarca,
+    modelo,
+    setModelo,
+    ano,
+    setAno,
+    valor,
+    setValor,
+    marcaOption,
+    setMarcaOption,
+    modeloOption,
+    setModeloOption,
+    anoOption,
+    setAnoOption,
+    autos,
+    setAutos,
+    exist,
+    setExist,
+    showList,
+    setShowList,
+    showTable, setShowTable,
+  };
 
-  return (
-    <Context.Provider value={context}>
-      {children}
-    </Context.Provider>
-  );
+  return <Context.Provider value={context}>{children}</Context.Provider>;
 }
 
 export default Context;

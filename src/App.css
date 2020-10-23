@@ -9,11 +9,22 @@
 } */
 
 .header {
+  background-image: repeating-linear-gradient(45deg, #007bff52, #007bffbf 100px);
   display: flex;
   flex-direction: column;
   justify-content: center;
-  height: 10vh;
+  height: 20vh;
   text-align: center;
+}
+.header h1 {
+  font-family: 'Raleway', sans-serif;
+  font-size: 4.5em;
+  font-weight: 500;
+}
+
+.main {
+  width: 90vw;
+  margin: auto;
 }
 
 .optionsBar {
@@ -26,7 +37,7 @@
   margin: 0 10px;
 }
 
-.cards-collections{
+.cards-collections {
   display: flex;
   justify-content: center;
 }
@@ -37,18 +48,29 @@
   flex-wrap: wrap;
   width: 90%;
 }
+
 .card {
-  border-radius: 25px;
-  flex-grow: 1;
+}
+
+div.card {
   margin: 10px;
   min-width: 14em;
+  max-width: 20em;
+  word-wrap: break-word;
+  flex-grow: 1;
+  border-radius: 50px;
+  background-color: #007bff44;
+  border: 4px solid #007bff;
+  padding: 1em;
 }
 
 .localizado {
   align-items: center;
   display: flex;
   flex-direction: column;
+  margin: 10px;
 }
+
 .exist {
   align-items: center;
   display: flex;
@@ -59,5 +81,40 @@
   display: flex;
   align-items: center;
   justify-content: space-around;
+}
 
+table,
+th,
+td {
+  background-color: #007bff44;
+  border: 4px solid #007bff;
+}
+td {
+  text-align: center;
+  margin: 10px;
+}
+div .table  {
+  display: flex;
+  justify-content: space-around;
+  /* overflow-x: scroll; */
+  margin: 0, 0, 0, 10px;
+}
+.table .btn {
+  margin: 10px;
+  width: 150px;
+}
+.lista .btn {
+  margin: 10px;
+  width: 150px;
+}
+
+.dropdown-menu {
+  min-height: 200px;
+  max-height: 400px;
+
+  overflow-y: scroll;
+}
+
+.vertical-text {
+  text-align: center;
 }

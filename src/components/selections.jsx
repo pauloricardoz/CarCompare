@@ -60,7 +60,7 @@ export default function Selections() {
           variant="success"
           onClick={() => updateList(autos, setAutos, valor, setExist, context)}
         >
-          Comparar?
+          Adicionar ao favoritos
         </Button>
       )}
     </div>

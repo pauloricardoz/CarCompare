@@ -6,6 +6,9 @@ import Selections from './components/selections';
 import Context from './context/context';
 import { Alert, Button } from 'react-bootstrap';
 import ButtomList from './components/buttomList';
+import Table from './components/compare/table';
+import ListFavorities from './components/list';
+import ButtomTabela from './components/buttomTable';
 
 function App() {
   const { valor, autos, setAutos, exist, setExist } = useContext(Context);
@@ -28,6 +31,8 @@ function App() {
       <header className="header">
         <h1>Comparação de carros na tabela FIPE</h1>
       </header>
+      <div className="main">
+
       <Selections />
       <div className="localizado">{valor ? <Card data={valor} /> : null}</div>
       {exist ? (
@@ -36,6 +41,12 @@ function App() {
         </Alert>
       ) : null}
       <ButtomList />
+      <ListFavorities />
+      <ButtomTabela />
+      <div className="table">
+        <Table />
+      </div>
+      </div>
     </div>
   );
 }
