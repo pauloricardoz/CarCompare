@@ -6,18 +6,11 @@ import Modelo from './inputs/modelo';
 import Ano from './inputs/ano';
 import Context from '../context/context';
 
-function notExist() {
-  const placeAlert = document.getElementById('notExist');
-  const textAlert = document.createElement('strong');
-  placeAlert.appendChild(textAlert);
-  setTimeout(() => placeAlert.removeChild(textAlert), 2000);
-  return null;
-}
 
-function updateList(autos, setAutos, valor) {
+function updateList(autos, setAutos, valor, setExist) {
   console.log('before',autos.map((a) => a.CodigoFipe),valor.CodigoFipe)
   if (autos.map((a) => `${a.CodigoFipe}/${a.AnoModelo}`).includes( `${valor.CodigoFipe}/${valor.AnoModelo}`)) {
-    notExist()
+    setExist(true)
     return false;
   }
   console.log('after')

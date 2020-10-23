@@ -3,14 +3,12 @@ import Context from '../../context/context';
 import Card from './card';
 
 export default function Cards() {
-  const {autos} =useContext(Context)
-  console.log('autos',autos)
+  const { autos } = useContext(Context);
+  console.log('autos', autos);
   return (
     <div className="cards">
       {autos.map((data) => (
-        <div>
-          <Card data={data}/>
-        </div>
+        <Card data={data} />
       ))}
     </div>
   );

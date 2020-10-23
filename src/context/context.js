@@ -12,7 +12,7 @@ export function Provider({ children }) {
   const [modeloOption, setModeloOption] = useState(null);
   const [anoOption, setAnoOption] = useState(null);
   const [autos, setAutos] = useState([])
-  const [existt, setExist] = useState(false)
+  const [exist, setExist] = useState(false)
   const context = {
     tipo, setTipo,
     marca, setMarca,
@@ -23,7 +23,7 @@ export function Provider({ children }) {
     modeloOption, setModeloOption,
     anoOption, setAnoOption,
     autos, setAutos,
-    existt, setExist
+    exist, setExist
   }
 
   return (

@@ -1,5 +1,6 @@
 import React, { useContext, useEffect, useState } from 'react';
 import './App.css';
+import Card from './components/cards/card';
 import Cards from './components/cards/cards';
 import Selections from './components/selections';
 import Context from './context/context';
@@ -12,7 +13,13 @@ function App() {
       setAutos(JSON.parse(saved));
     }
   }, []);
-
+  useEffect(() => {
+    if (exist) {
+      setTimeout(() =>
+        setExist(false)
+        , 2000);
+    }
+  }, [exist]);
   let valores = null;
   if (valor) valores = [valor];
   return (
@@ -21,8 +28,11 @@ function App() {
         <h1>Comparação de carros na tabela FIPE</h1>
       </header>
       <Selections />
-      <div id="notExist"></div>
-      <div>{!autos ? null : <Cards />}</div>
+      <div className="localizado">
+        {valor ? <Card data={valor} /> : null}
+      </div>
+      {exist ? <strong className="exist">Já existe</strong> : null}
+      {!autos ? null : <Cards />}
     </div>
   );
 }
