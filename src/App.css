@@ -3,3 +3,25 @@
   padding: 0;
   box-sizing: border-box;
 }
+
+div{
+  border: 1px solid red;
+}
+
+.header{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  text-align: center;
+  height: 10vh;
+}
+
+.optionsBar {
+  display: flex;
+  margin: 10px;
+}
+.inputs {
+  display: flex;
+  flex-direction: column;
+  margin:  0 10px;
+}

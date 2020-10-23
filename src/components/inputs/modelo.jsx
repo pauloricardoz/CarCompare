@@ -24,7 +24,7 @@ export default function Modelo() {
   }, [modelo]);
   if (!modeloOption) return null;
   return (
-    <div>
+    <div className="inputs">
       <label htmlFor="modelo"> Modelo: </label>
       <select
         name="modelo"

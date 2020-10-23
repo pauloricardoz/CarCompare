@@ -27,7 +27,7 @@ export default function Ano() {
   }, [ano]);
   if (!anoOption) return null;
   return (
-    <div>
+    <div className="inputs">
       <label htmlFor="ano"> Ano: </label>
       <select name="ano" id="ano" onChange={(e) => updateState(e, setAno)}>
         <option value="" selected disabled hidden>Selecione um ano</option>

@@ -1,29 +1,29 @@
-import React, { useContext } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import './App.css';
+import Cards from './components/cards/cards';
 import Selections from './components/selections';
-import Context, { Provider } from './context/context'
+import Context from './context/context';
 
 function App() {
-  const { valor } = useContext(Context);
-  let valores = null;
-  if (valor) valores = Object.entries(valor);
-  return (
-      <div className="App">
-        <header></header>
-        <Selections />
-        <div>
-        <ul>
-          {!valores
-            ? null
-            : valores.map((e) => (
-                <li>
-                  {e[0]}: {e[1]}
-                </li>
-              ))}
-        </ul>
-      </div>
+  const { valor, autos, setAutos, exist, setExist } = useContext(Context);
+  const saved = localStorage.getItem('autos');
+  useEffect(() => {
+    if (saved) {
+      setAutos(JSON.parse(saved));
+    }
+  }, []);
 
-      </div>
+  let valores = null;
+  if (valor) valores = [valor];
+  return (
+    <div className="App">
+      <header className="header">
+        <h1>Comparação de carros na tabela FIPE</h1>
+      </header>
+      <Selections />
+      <div id="notExist"></div>
+      <div>{!autos ? null : <Cards />}</div>
+    </div>
   );
 }
 

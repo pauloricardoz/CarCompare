@@ -30,7 +30,7 @@ export default function Tipo() {
     if (tipo.value !== '') apiMarca(tipo.value).then((e) => setMarcaOption(e));
   }, [tipo]);
   return (
-    <div>
+    <div className="inputs">
       <label htmlFor="tipo">Tipo de veiculo: </label>
       <select
         name="tipo"

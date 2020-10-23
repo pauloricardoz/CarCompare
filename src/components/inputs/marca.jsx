@@ -28,7 +28,7 @@ export default function Marca() {
   );
   if (!marcaOption) return null;
   return (
-    <div>
+    <div className="inputs">
       <label htmlFor="marca"> Marcas: </label>
       <select
         name="marca"
