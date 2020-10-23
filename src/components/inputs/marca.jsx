@@ -1,52 +1,59 @@
 import React, { useContext, useEffect, useState } from 'react';
+import { Dropdown } from 'react-bootstrap';
 import Context from '../../context/context';
 import { apiModelos } from '../../services/apiFipe';
-import { updateState } from '../../services/comumFunctions';
+
+function updateState(event, stateFunc, option) {
+  console.log('event', event);
+  console.log('option', option);
+  let codigo = option.find((opt) => opt.nome === event);
+  if (codigo) codigo = codigo.codigo;
+  stateFunc((state) => ({ ...state, value: event, codigo }));
+}
 
 export default function Marca() {
   const { tipo, marca, setMarca, marcaOption, modelo, setModelo, setModeloOption } = useContext(
     Context
   );
+  const [textBtn, setTextBtn] = useState('Marcas:');
+  useEffect(() => setTextBtn('Marcas:'), [tipo]);
   useEffect(() => {
     if (!marcaOption) return null;
   }, [marcaOption]);
-  useEffect(
-    async() => {
-      
-      if (marca.value === '') {
-        await setModelo({ ...modelo, value: '' });
-        await setModeloOption(null);
-        return null;
-      }
-      apiModelos(tipo.value, marca.codigo).then((e) => setModeloOption(e.modelos));
-      return ()=>{
-        setModelo({ ...modelo, value: '' });
-        setModeloOption(null);
-        setMarca(s=>({...s,value:''}))}
-    },
-    [marca]
-  );
+  useEffect(async () => {
+    if (marca.value === '') {
+      await setModelo({ ...modelo, value: '' });
+      await setModeloOption(null);
+      return null;
+    }
+    apiModelos(tipo.value, marca.codigo).then((e) => setModeloOption(e.modelos));
+    return () => {
+      setModelo({ ...modelo, value: '' });
+      setModeloOption(null);
+      setMarca((s) => ({ ...s, value: '' }));
+    };
+  }, [marca]);
   if (!marcaOption) return null;
   return (
-    <div className="inputs">
-      <label htmlFor="marca"> Marcas: </label>
-      <select
+    <Dropdown className="inputs">
+      <Dropdown.Toggle variant="primary" id="dropdown-basic">
+        {textBtn}
+      </Dropdown.Toggle>
+      <Dropdown.Menu
         name="marca"
         id="marca"
-        onChange={(e) => {
+        onClick={(e) => {
           setModeloOption(null);
-          updateState(e, setMarca, marcaOption);
+          updateState(e.target.outerText, setMarca, marcaOption);
+          setTextBtn(`${e.target.outerText}`);
         }}
       >
-        <option value="" selected disabled hidden>
-          Selecione uma marca
-        </option>
         {marcaOption.map((e) => (
-          <option value={e.nome} key={e.nome}>
+          <Dropdown.Item value={e.nome} key={e.nome}>
             {e.nome}
-          </option>
+          </Dropdown.Item>
         ))}
-      </select>
-    </div>
+      </Dropdown.Menu>
+    </Dropdown>
   );
 }

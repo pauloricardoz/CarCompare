@@ -1,11 +1,17 @@
-import React, { useContext, useEffect } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
+import { Dropdown } from 'react-bootstrap';
 import Context from '../../context/context';
 import { apiMarca } from '../../services/apiFipe';
-import { updateState } from '../../services/comumFunctions';
+
+function updateState(event, stateFunc, option) {
+  let codigo = option.find((opt) => opt.nome === event);
+  if (codigo) codigo = codigo.codigo;
+  stateFunc((state) => ({ ...state, value: event, codigo }));
+}
 
 const tipoOption = ['carros', 'motos', 'caminhoes'];
 
-export default function Tipo() {
+export default function Test() {
   const {
     tipo,
     setTipo,
@@ -18,6 +24,7 @@ export default function Tipo() {
     setModelo,
     setModeloOption,
   } = useContext(Context);
+  const [textBtn, setTextBtn] = useState(' Tipo de veiculo:');
   useEffect(async () => {
     if (tipo.value !== '' && marca.value !== '') {
       setMarca({ ...marca, value: '' });
@@ -30,25 +37,28 @@ export default function Tipo() {
     if (tipo.value !== '') apiMarca(tipo.value).then((e) => setMarcaOption(e));
   }, [tipo]);
   return (
-    <div className="inputs">
-      <label htmlFor="tipo">Tipo de veiculo: </label>
-      <select
+    <Dropdown className="inputs">
+      <Dropdown.Toggle variant="primary" id="dropdown-basic">
+        {textBtn}
+      </Dropdown.Toggle>
+
+      <Dropdown.Menu
         name="tipo"
         id="tipo"
-        onChange={(e) => {
+        onClick={(e) => {
+          console.log(e);
           setMarcaOption(null);
-          updateState(e, setTipo, tipoOption);
+          updateState(e.target.outerText, setTipo, tipoOption);
+          setTextBtn(`${e.target.outerText}`);
         }}
+        
       >
-        <option value="" selected disabled hidden>
-          Escolha um
-        </option>
         {tipoOption.map((e) => (
-          <option value={e} key={e}>
+          <Dropdown.Item value={e} key={e}>
             {e}
-          </option>
+          </Dropdown.Item>
         ))}
-      </select>
-    </div>
+      </Dropdown.Menu>
+    </Dropdown>
   );
 }
