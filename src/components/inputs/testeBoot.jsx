@@ -1,8 +1,8 @@
 import React, { useContext, useEffect, useState } from 'react';
+import { Dropdown } from 'react-bootstrap';
 import Context from '../../context/context';
 import { apiMarca } from '../../services/apiFipe';
 import { updateState } from '../../services/comumFunctions';
-import { Dropdown } from 'react-bootstrap';
 
 const tipoOption = ['carros', 'motos', 'caminhoes'];
 
@@ -44,8 +44,9 @@ export default function Test() {
           setMarcaOption(null);
           updateState(e, setTipo, tipoOption);
           setTextBtn(`${e.target.outerText}`);
-          console.log(e)
+          console.log(e);
         }}
+        
       >
         {tipoOption.map((e) => (
           <Dropdown.Item value={e} key={e}>
