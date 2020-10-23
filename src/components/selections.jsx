@@ -5,6 +5,7 @@ import Marca from './inputs/marca';
 import Modelo from './inputs/modelo';
 import Ano from './inputs/ano';
 import Context from '../context/context';
+import Test from './inputs/testeBoot';
 
 
 function updateList(autos, setAutos, valor, setExist) {
@@ -24,7 +25,8 @@ export default function Selections() {
   if (valor) valores = Object.entries(valor);
   return (
     <div className="optionsBar">
-      <Tipo />
+      {/* <Tipo /> */}
+      <Test />
       <Marca />
       <Modelo />
       <Ano />

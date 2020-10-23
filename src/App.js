@@ -4,6 +4,7 @@ import Card from './components/cards/card';
 import Cards from './components/cards/cards';
 import Selections from './components/selections';
 import Context from './context/context';
+import {  } from 'react-bootstrap'
 
 function App() {
   const { valor, autos, setAutos, exist, setExist } = useContext(Context);
