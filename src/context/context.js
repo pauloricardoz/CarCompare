@@ -1,7 +1,17 @@
 import React, { createContext, useState } from 'react';
 
 const Context = createContext();
-
+const columns = [
+  'Modelo',
+  'AnoModelo',
+  'Marca',
+  'Combustivel',
+  'TipoVeiculo',
+  'CodigoFipe',
+  'SiglaCombustivel',
+  'MesReferencia',
+  'Valor',
+];
 export function Provider({ children }) {
   const [tipo, setTipo] = useState({ index: 0, value: '', index: 0 });
   const [marca, setMarca] = useState({ index: 1, value: '', index: 0 });
@@ -15,6 +25,20 @@ export function Provider({ children }) {
   const [exist, setExist] = useState(false);
   const [showList, setShowList] = useState(false);
   const [showTable, setShowTable] = useState(false);
+  const [order, setOrder] = useState({ column: 'Modelo', sort: 'ASC' });
+  const [name, setName] = useState('');
+  const [filterByNumericValues, setFilterByNumericValues] = useState([]);
+  const [col, SetCol] = useState('AnoModelo');
+  const [comp, SetComp] = useState('maior que');
+  const [val, SetVal] = useState(undefined);
+  const add = () => {
+    if (col === '' || comp === '' || !val) {
+      return null;
+    }
+    const filtro = { column: col, comparison: comp, value: val };
+    setFilterByNumericValues(oldFilters => [...oldFilters, filtro]);
+    SetCol('');
+  };
   const context = {
     tipo,
     setTipo,
@@ -38,7 +62,22 @@ export function Provider({ children }) {
     setExist,
     showList,
     setShowList,
-    showTable, setShowTable,
+    showTable,
+    setShowTable,
+    columns,
+    add,
+    order,
+    setOrder,
+    name,
+    setName,
+    filterByNumericValues,
+    setFilterByNumericValues,
+    col,
+    SetCol,
+    comp,
+    SetComp,
+    val,
+    SetVal,
   };
 
   return <Context.Provider value={context}>{children}</Context.Provider>;

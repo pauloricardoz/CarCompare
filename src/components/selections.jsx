@@ -5,7 +5,6 @@ import Marca from './inputs/marca';
 import Modelo from './inputs/modelo';
 import Ano from './inputs/ano';
 import Context from '../context/context';
-import Test from './inputs/testeBoot';
 import { Button } from 'react-bootstrap';
 
 function cleanInput(context) {

@@ -1,17 +1,8 @@
-import React, { useContext } from 'react';
+import React, { useContext, useEffect } from 'react';
 import Context from '../../context/context';
+import { FaMinus } from 'react-icons/fa';
+import { Button } from 'react-bootstrap';
 
-const keys = [
-  'Modelo',
-  'AnoModelo',
-  'Marca',
-  'Combustivel',
-  'TipoVeiculo',
-  'CodigoFipe',
-  'SiglaCombustivel',
-  'MesReferencia',
-  'Valor',
-];
 const cabecalhos = [
   'Modelo',
   'Ano Modelo',
@@ -22,40 +13,105 @@ const cabecalhos = [
   'Sigla Combustivel',
   'Mês Referência',
   'Valor (RS)',
-  'Remover'
+  'Remover',
 ];
-export default function Table() {
-  const { autos, showTable } = useContext(Context);
-  if (autos.length === 0) return null;
-  if (!autos) return null;
+const cabString = [
+  'Modelo',
+  'Marca',
+  'Combustivel',
+  'CodigoFipe',
+  'SiglaCombustivel',
+  'MesReferencia',
+];
 
-  console.log(autos);
+function organizeMe(a, b, type) {
+  const col = type.column;
+  let organized = [];
+  if (cabString.includes(col)) {
+    organized = a[col] > b[col] ? 1 : -1;
+  } else {
+    if (col !== 'Valor') {
+      organized = parseInt(a[col], 10) - parseInt(b[col], 10);
+    } else {
+      organized =
+        parseInt(a[col].replace(/R\$ /, ''), 10) - parseInt(b[col].replace(/R\$ /, ''), 10);
+    }
+  }
+  if (type.sort === 'ASC') {
+    return organized;
+  }
+  return organized * -1;
+}
+
+export default function Table() {
+  const { autos, setAutos, showTable, columns, order, name, filterByNumericValues } = useContext(
+    Context
+  );
+  useEffect(() => {
+    localStorage.setItem('autos', JSON.stringify(autos));
+  }, [autos]);
+  if (!autos) return null;
+  if (autos.length === 0) return null;
+  let tabAutos = autos.sort((a, b) => organizeMe(a, b, order));
+  filterByNumericValues.forEach((e) => {
+    
+    switch (e.comparison) {
+      case 'maior que':
+        tabAutos = tabAutos.filter((dado) => Number(dado[e.column]) > e.value);
+        break;
+      case 'menor que':
+        tabAutos = tabAutos.filter((dado) => Number(dado[e.column]) < e.value);
+        break;
+      case 'igual a':
+        tabAutos = tabAutos.filter((dado) => dado[e.column] === e.value);
+        break;
+      default:
+        break;
+    }
+  });
   return (
     <div>
       {showTable ? (
         <table>
           <thead>
-            {cabecalhos.map((c) => (
+            {cabecalhos.map((cabecalho) => (
               <th className="vertical-text">
-                <span className="tab-cabec">{c}</span>
+                <span className="tab-cabec">{cabecalho}</span>
               </th>
             ))}
           </thead>
           <tbody>
-            {autos.map((a) => (
-              <tr>
-                <td>{a[keys[0]]}</td>
-                <td>{a[keys[1]]}</td>
-                <td>{a[keys[2]]}</td>
-                <td>{a[keys[3]]}</td>
-                <td>{a[keys[4]]}</td>
-                <td>{a[keys[5]]}</td>
-                <td>{a[keys[6]]}</td>
-                <td>{a[keys[7]]}</td>
-                <td>{a[keys[8]].replace(/R\$ /,'')}</td>
-                <td><button>-</button></td>
-              </tr>
-            ))}
+            {tabAutos
+              .filter((e) => (name === '' ? true : new RegExp(name, 'i').test(e.Modelo)))
+              .map((a) => (
+                <tr>
+                  <td>{a[columns[0]]}</td>
+                  <td>{a[columns[1]]}</td>
+                  <td>{a[columns[2]]}</td>
+                  <td>{a[columns[3]]}</td>
+                  <td>{a[columns[4]]}</td>
+                  <td>{a[columns[5]]}</td>
+                  <td>{a[columns[6]]}</td>
+                  <td>{a[columns[7]]}</td>
+                  <td>{a[columns[8]].replace(/R\$ /, '')}</td>
+                  <td>
+                    <Button
+                      id="remove-table"
+                      onClick={() =>
+                        setAutos((s) =>
+                          s.filter(
+                            (auto) =>
+                              `${auto.CodigoFipe}/${auto.AnoModelo}` !==
+                              `${a.CodigoFipe}/${a.AnoModelo}`
+                          )
+                        )
+                      }
+                    >
+                      <FaMinus />
+                    </Button>
+                  </td>
+                </tr>
+              ))}
           </tbody>
         </table>
       ) : null}

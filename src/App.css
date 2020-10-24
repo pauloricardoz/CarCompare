@@ -8,6 +8,12 @@
   border: 1px solid red;
 } */
 
+.App {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+}
+
 .header {
   background-image: repeating-linear-gradient(45deg, #007bff52, #007bffbf 100px);
   display: flex;
@@ -16,6 +22,14 @@
   height: 20vh;
   text-align: center;
 }
+
+.footer {
+  background-image: repeating-linear-gradient(45deg, #007bff52, #007bffbf 100px);
+  height: 20px;
+  width: 100%;
+  flex-shrink: 0;
+}
+
 .header h1 {
   font-family: 'Raleway', sans-serif;
   font-size: 4.5em;
@@ -25,6 +39,9 @@
 .main {
   width: 90vw;
   margin: auto;
+  padding-bottom: 20px;
+
+  flex: 1 0 auto;
 }
 
 .optionsBar {
@@ -91,9 +108,11 @@ td {
 }
 td {
   text-align: center;
-  margin: 10px;
+  margin: 5px;
+  padding: 5px;
+  box-sizing: border-box;
 }
-div .table  {
+div .table {
   display: flex;
   justify-content: space-around;
   /* overflow-x: scroll; */
@@ -117,4 +136,15 @@ div .table  {
 
 .vertical-text {
   text-align: center;
+}
+
+#remove-table {
+  width:auto;
+}
+#remove-table:hover {
+  background-color: rgba(255, 0, 0, 0.597);
+}
+td:hover{
+  font-weight: 700;
+  background-color: #007bff2a;
 }

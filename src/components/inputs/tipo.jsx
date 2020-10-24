@@ -11,7 +11,7 @@ function updateState(event, stateFunc, option) {
 
 const tipoOption = ['carros', 'motos', 'caminhoes'];
 
-export default function Test() {
+export default function Tipo() {
   const {
     tipo,
     setTipo,
