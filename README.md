@@ -19,6 +19,8 @@
 
 Projeto trata-se de uma aplicação para comparar valores e dados de automóveis, utilizando o que há de mais moderno dentro do ecossistema React: Hooks e Context API!
 
+Foram utilizados também o React-BootStraps e React-ChartJS, com as funções de estilizar e criação do gráfico, respectivamente.
+
 Nele será possível ver, buscar, filtrar, favoritar e confrontar dados de automóveis vindo de uma API com os dados da tabela FIPE!
 
 O layout tem como foco desktops.

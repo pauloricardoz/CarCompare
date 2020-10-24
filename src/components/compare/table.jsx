@@ -1,8 +1,7 @@
 import React, { useContext, useEffect } from 'react';
-import Context from '../../context/context';
 import { FaMinus } from 'react-icons/fa';
 import { Button } from 'react-bootstrap';
-import Tbody from './tbody';
+import Context from '../../context/context';
 
 const cabecalhos = [
   'Modelo',
@@ -44,8 +43,13 @@ function organizeMe(a, b, type) {
   return organized * -1;
 }
 
-function filterFunction(filterByNumericValues) {
-  let tabAutos = [];
+export default function Table() {
+  const { autos, setAutos, showTable, columns, order, name, filterByNumericValues } = useContext(
+    Context
+  );
+  if (!autos) return null;
+  if (autos.length === 0) return null;
+  let tabAutos = autos.sort((a, b) => organizeMe(a, b, order));
   filterByNumericValues.forEach((e) => {
     switch (e.comparison) {
       case 'maior que':
@@ -61,23 +65,12 @@ function filterFunction(filterByNumericValues) {
         break;
     }
   });
-  return tabAutos;
-}
-
-export default function Table() {
-  const { autos, setAutos, showTable, columns, order, name, filterByNumericValues } = useContext(
-    Context
-  );
-  if (!autos) return null;
-  if (autos.length === 0) return null;
-  let tabAutos = autos.sort((a, b) => organizeMe(a, b, order));
-  tabAutos = filterFunction(filterByNumericValues);
   return (
     <table>
       <thead>
         <tr className="tab-cabec">
           {cabecalhos.map((cabecalho) => (
-            <th className="rotate">
+            <th className="rotate" key={cabecalho}>
               <div>
                 <span>{cabecalho}</span>
               </div>
@@ -85,7 +78,39 @@ export default function Table() {
           ))}
         </tr>
       </thead>
-      {Tbody(tabAutos)}
+      <tbody>
+        {tabAutos
+          .filter((e) => (name === '' ? true : new RegExp(name, 'i').test(e.Modelo)))
+          .map((a) => (
+            <tr key={`${a[columns[0]]}-${a[columns[1]]}`}>
+              <td>{a[columns[0]]}</td>
+              <td>{a[columns[1]]}</td>
+              <td>{a[columns[2]]}</td>
+              <td>{a[columns[3]]}</td>
+              <td>{a[columns[4]]}</td>
+              <td>{a[columns[5]]}</td>
+              <td>{a[columns[6]]}</td>
+              <td>{a[columns[7]]}</td>
+              <td>{a[columns[8]].replace(/R\$ /, '')}</td>
+              <td>
+                <Button
+                  id="remove-table"
+                  onClick={() =>
+                    setAutos((s) =>
+                      s.filter(
+                        (auto) =>
+                          `${auto.CodigoFipe}/${auto.AnoModelo}` !==
+                          `${a.CodigoFipe}/${a.AnoModelo}`
+                      )
+                    )
+                  }
+                >
+                  <FaMinus />
+                </Button>
+              </td>
+            </tr>
+          ))}
+      </tbody>
     </table>
   );
 }

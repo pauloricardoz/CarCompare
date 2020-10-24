@@ -3,8 +3,9 @@ import { Button } from 'react-bootstrap';
 import { FaMinus } from 'react-icons/fa';
 import Context from '../../context/context';
 
-export default function Tbody(tabAutos) {
+export default function Tbody(props) {
   const { setAutos, columns, name } = useContext(Context);
+  const { tabAutos } = props;
   return (
     <tbody>
       {tabAutos
