@@ -32,3 +32,10 @@ O layout tem como foco desktops.
   - Projeto desenvolvido por Paulo Ricardo Zambelli Taveira.
 
   - Duração: cinco dias.
+
+  
+### Demonstração do funcionamento
+
+Pode-se observar o funcionamento no GIF abaixo.
+
+![funcionamento](funcionamento.gif)
