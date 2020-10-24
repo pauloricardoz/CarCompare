@@ -39,3 +39,5 @@ O layout tem como foco desktops.
 Pode-se observar o funcionamento no GIF abaixo.
 
 ![funcionamento](funcionamento.gif)
+
+#### Obrigado e até logo!
