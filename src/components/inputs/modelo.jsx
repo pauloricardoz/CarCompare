@@ -23,16 +23,7 @@ function cleanInput(context) {
 
 export default function Modelo() {
   const {
-    tipo,
-    marca,
-    modelo,
-    setModelo,
-    modeloOption,
-    setAno,
-    setAnoOption,
-    setValor,
-    setValoresChart,
-  } = useContext(Context);
+    tipo, marca, modelo, setModelo, modeloOption, setAno, setAnoOption, setValor, setValoresChart } = useContext(Context);
   const [textBtn, setTextBtn] = useState('Modelo:');
 
   useEffect(() => setTextBtn('Modelo:'), [marca]);
@@ -47,15 +38,12 @@ export default function Modelo() {
       setAnoOption(e);
     });
   }, [modelo]);
-  if (!modeloOption) {
-    return null;
-  }
+  if (!modeloOption) {return null;}
   return (
     <Dropdown className="inputs">
       <Dropdown.Toggle variant="primary" id="dropdown-basic">
         {textBtn}
       </Dropdown.Toggle>
-
       <Dropdown.Menu
         name="modelo"
         id="modelo"

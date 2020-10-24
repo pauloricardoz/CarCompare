@@ -75,24 +75,8 @@ function App() {
                 .sort((a, b) => a.AnoModelo - b.AnoModelo)
                 .map((prom) => ({ Valor: prom.Valor, AnoModelo: prom.AnoModelo }))
             : []
-
-          /* {
-            AnoModelo: proms.map((prom) => prom.AnoModelo),
-            Valor: proms.map((prom) => convertMoney(prom.Valor)),
-            combinado: proms.map((prom) => `${prom.AnoModelo}....${convertMoney(prom.Valor)}`),
-          } */
         )
       );
-      // .then(() =>
-      //   setValoresChart((s) =>
-      //     s.combinado
-      //       .sort((a, b) => a.match(/(.*)\.\.\.\..*/) - b.match(/(.*)\.\.\.\..*/))
-      //       .map((p) => ({
-      //         AnoModelo: p.match(/(.*)\.\.\.\..*/),
-      //         Valor: p.match(/.*\.\.\.\.(.*)/),
-      //       }))
-      //   )
-      // );
     });
   }, [valor]);
 

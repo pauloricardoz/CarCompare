@@ -1,7 +1,7 @@
 import React, { useContext, useEffect } from 'react';
-import Context from '../../context/context';
 import { FaMinus } from 'react-icons/fa';
 import { Button } from 'react-bootstrap';
+import Context from '../../context/context';
 
 const cabecalhos = [
   'Modelo',
@@ -47,7 +47,6 @@ export default function Table() {
   const { autos, setAutos, showTable, columns, order, name, filterByNumericValues } = useContext(
     Context
   );
-  
   if (!autos) return null;
   if (autos.length === 0) return null;
   let tabAutos = autos.sort((a, b) => organizeMe(a, b, order));
@@ -69,10 +68,12 @@ export default function Table() {
   return (
     <table>
       <thead>
-        <tr className="tab-cabec" >
+        <tr className="tab-cabec">
           {cabecalhos.map((cabecalho) => (
-            <th className="rotate">
-              <div><span>{cabecalho}</span></div>
+            <th className="rotate" key={cabecalho}>
+              <div>
+                <span>{cabecalho}</span>
+              </div>
             </th>
           ))}
         </tr>
@@ -81,7 +82,7 @@ export default function Table() {
         {tabAutos
           .filter((e) => (name === '' ? true : new RegExp(name, 'i').test(e.Modelo)))
           .map((a) => (
-            <tr>
+            <tr key={`${a[columns[0]]}-${a[columns[1]]}`}>
               <td>{a[columns[0]]}</td>
               <td>{a[columns[1]]}</td>
               <td>{a[columns[2]]}</td>

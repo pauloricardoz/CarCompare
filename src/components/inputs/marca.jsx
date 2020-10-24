@@ -11,24 +11,16 @@ function updateState(event, stateFunc, option) {
 
 export default function Marca() {
   const {
-    tipo,
-    marca,
-    setMarca,
-    marcaOption,
-    modelo,
-    setModelo,
-    setModeloOption,
-    setValoresChart,
-  } = useContext(Context);
+    tipo, marca, setMarca, marcaOption, modelo, setModelo, setModeloOption, setValoresChart } = useContext(Context);
   const [textBtn, setTextBtn] = useState('Marcas:');
   useEffect(() => setTextBtn('Marcas:'), [tipo]);
   useEffect(() => {
     if (!marcaOption) return null;
   }, [marcaOption]);
-  useEffect(async () => {
+  useEffect( () => {
     if (marca.value === '' || typeof marca.value !== 'string') {
-      await setModelo({ ...modelo, value: '' });
-      await setModeloOption(null);
+       setModelo({ ...modelo, value: '' });
+       setModeloOption(null);
       setValoresChart([]);
       return null;
     }

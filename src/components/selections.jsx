@@ -1,5 +1,4 @@
-import React, { useContext, useEffect, useState } from 'react';
-import { apiMarca, apiModelos } from '../services/apiFipe';
+import React, { useContext } from 'react';
 import Tipo from './inputs/tipo';
 import Marca from './inputs/marca';
 import Modelo from './inputs/modelo';
@@ -9,8 +8,6 @@ import { Button } from 'react-bootstrap';
 
 function cleanInput(context) {
   const {
-    tipo,
-    setTipo,
     setMarca,
     setModelo,
     setAno,
@@ -20,9 +17,9 @@ function cleanInput(context) {
     setAnoOption,
   } = context;
   console.log('Limpa tudo');
-  setMarca({ index: 0, value: '', index: 0 });
-  setModelo({ index: 0, value: '', index: 0 });
-  setAno({ index: 0, value: '', index: 0 });
+  setMarca({ index: 0, value: ''});
+  setModelo({ index: 0, value: '' });
+  setAno({ index: 0, value: '' });
   setValor(null);
   setMarcaOption(null);
   setModeloOption(null);
