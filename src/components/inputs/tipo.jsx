@@ -11,28 +11,23 @@ function updateState(event, stateFunc, option) {
 
 const tipoOption = ['carros', 'motos', 'caminhoes'];
 
+function clean(
+setMarca, setMarcaOption, setModelo, setModeloOption, setAno, setAnoOption ) {
+  setMarca(marca=>({ ...marca, value: '' }));
+  setMarcaOption(null);
+  setModelo(modelo=>({ ...modelo, value: '' }));
+  setModeloOption(null);
+  setAno(ano=>({ ...ano, value: '' }));
+  setAnoOption(null);
+}
+
 export default function Tipo() {
   const {
-    tipo,
-    setTipo,
-    setMarca,
-    setMarcaOption,
-    marca,
-    setAno,
-    setAnoOption,
-    modelo,
-    setModelo,
-    setModeloOption,
-  } = useContext(Context);
+    tipo, setTipo, setMarca, setMarcaOption, marca, setAno, setAnoOption, modelo, setModelo, setModeloOption, } = useContext(Context);
   const [textBtn, setTextBtn] = useState(' Tipo de veiculo:');
   useEffect(async () => {
     if (tipo.value !== '' && marca.value !== '') {
-      setMarca({ ...marca, value: '' });
-      setMarcaOption(null);
-      setModelo({ ...modelo, value: '' });
-      setModeloOption(null);
-      setAno({ ...modelo, value: '' });
-      setAnoOption(null);
+      clean( setMarca, setMarcaOption, setModelo, setModeloOption, setAno, setAnoOption )
     }
     if (tipo.value !== '' && typeof tipo.value === 'string') {
       apiMarca(tipo.value).then((e) => setMarcaOption(e));

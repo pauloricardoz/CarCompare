@@ -3,10 +3,7 @@ import { Button, Form } from 'react-bootstrap';
 import Context from '../../context/context';
 
 export default function OrderToMe() {
-  const [orderBasico, setOrderBasico] = useState({
-    column: 'Modelo',
-    sort: 'ASC',
-  });
+  const [orderBasico, setOrderBasico] = useState({ column: 'Modelo', sort: 'ASC' });
   const { columns, setOrder } = useContext(Context);
   return (
     <div className="order-me">

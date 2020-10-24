@@ -17,7 +17,6 @@ export default function Ano() {
     Context
   );
   const [textBtn, setTextBtn] = useState('Ano:');
-
   useEffect(() => setTextBtn('Ano:'), [modelo]);
   useEffect(() => {
     cleanInput({ setValor, setValoresChart });
@@ -25,9 +24,7 @@ export default function Ano() {
       setValor(null);
       return null;
     }
-    apiValor(tipo.value, marca.codigo, modelo.codigo, ano).then((e) => {
-      setValor(e);
-    });
+    apiValor(tipo.value, marca.codigo, modelo.codigo, ano).then((e) => setValor(e));
   }, [ano]);
   if (!anoOption) return null;
   return (
@@ -36,7 +33,6 @@ export default function Ano() {
         <Dropdown.Toggle variant="primary" id="dropdown-basic">
           {textBtn}
         </Dropdown.Toggle>
-
         <Dropdown.Menu
           name="ano"
           id="ano"
