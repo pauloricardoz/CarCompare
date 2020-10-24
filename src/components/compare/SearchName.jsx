@@ -1,12 +1,19 @@
 import React, { useContext } from 'react';
+import { Form } from 'react-bootstrap';
 import Context from '../../context/context';
 
 export default function NameSearch(props) {
   const { setName } = useContext(Context);
   return (
-    <div className="flex-me column-me">
-      <label htmlFor="look">Filtrar Modelo:</label>
-      <input name="look" type="text" onChange={(e) => setName(e.target.value)} />
-    </div>
+    <Form>
+      <Form.Group controlId="FiltrarNomeModelo">
+        <Form.Label>Filtrar por Modelo:</Form.Label>
+        <Form.Control
+          type="text"
+          placeholder="Nome do Modelo"
+          onChange={(e) => setName(e.target.value)}
+        />
+      </Form.Group>
+    </Form>
   );
 }
