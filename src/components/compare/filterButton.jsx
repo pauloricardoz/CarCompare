@@ -11,7 +11,7 @@ export default function ButtonAdd() {
         <Form.Control type="number" placeholder="Valor" onChange={(e) => SetVal(e.target.value)} />
       </Form.Group>
       <Button onClick={() => add()} className="center-me">
-        Add
+        Adicionar
       </Button>
     </Form>
   );

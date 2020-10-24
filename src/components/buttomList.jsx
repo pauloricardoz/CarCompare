@@ -1,14 +1,14 @@
-import React, { useContext, useState } from 'react';
+import React, { useContext } from 'react';
 import { Button } from 'react-bootstrap';
 import Context from '../context/context';
-import Cards from './cards/cards';
 
-export default function ButtomList() {
-  const { showList, setShowList, autos } = useContext(Context);
+export default function ButtomShow(props) {
+  const { show, setShow, text } = props;
+
   return (
     <div className="lista">
-      <Button variant={!showList ? 'primary' : 'success'} onClick={() => setShowList((s) => !s)}>
-        {!showList ? 'Ver Lista' : 'Ocutar'}
+      <Button variant={!show ? 'primary' : 'success'} onClick={() => setShow((s) => !s)}>
+        {!show ? text.show : text.hide}
       </Button>
     </div>
   );

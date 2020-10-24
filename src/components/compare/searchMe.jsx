@@ -8,15 +8,22 @@ import NameSearch from './SearchName';
 
 export default function Procurar() {
   return (
-    <div className="flex-me">
-      <NameSearch />
-      <OrderToMe />
-      <div className="filters ">
+    <div className="options-table">
+      <div className="vertical-line"></div>
+      <div className="options-top">
+        <NameSearch />
+        <OrderToMe />
+      </div>
+      <div className="vertical-line"></div>
+      <div className="filter ">
         <ColumnSearch />
         <ComparisonSearch />
         <ButtonAdd />
       </div>
+
+      <div className="vertical-line"></div>
       <FiltersBox />
+      <div className="vertical-line"></div>
     </div>
   );
 }

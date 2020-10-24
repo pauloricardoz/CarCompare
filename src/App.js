@@ -4,53 +4,34 @@ import Card from './components/cards/card';
 import Cards from './components/cards/cards';
 import Selections from './components/selections';
 import Context from './context/context';
-import { Alert, Button } from 'react-bootstrap';
-import ButtomList from './components/buttomList';
-import Table from './components/compare/table';
 import ListFavorities from './components/list';
-import ButtomTabela from './components/buttomTable';
-import OrderToMe from './components/compare/orderMe';
-import NameSearch from './components/compare/SearchName';
-import Procurar from './components/compare/searchMe';
+import ContainerTable from './components/compare/tableContainer';
+import Header from './components/Header';
+import ExistAlert from './components/inputs/existAlert';
+import ButtomShow from './components/buttomList';
 
 function App() {
-  const { valor, autos, setAutos, exist, setExist } = useContext(Context);
-  const [showList, setShowList] = useState(false);
+  const { valor, autos, setAutos, exist, setExist, showTable, setShowTable, showList, setShowList } = useContext(Context);
   const saved = localStorage.getItem('autos');
+  useEffect(() => { if (saved) setAutos(JSON.parse(saved)) }, []);
+  useEffect(() => { if (exist) { setTimeout(() => setExist(false), 2000); } }, [exist]);
   useEffect(() => {
-    if (saved) {
-      setAutos(JSON.parse(saved));
-    }
-  }, []);
-  useEffect(() => {
-    if (exist) {
-      setTimeout(() => setExist(false), 2000);
-    }
-  }, [exist]);
+    localStorage.setItem('autos', JSON.stringify(autos));
+  }, [autos]);
   let valores = null;
   if (valor) valores = [valor];
   return (
     <div className="App">
-      <header className="header">
-        <h1>Comparação de carros na tabela FIPE</h1>
-      </header>
+      <Header />
       <div className="main">
         <Selections />
         <div className="localizado">{valor ? <Card data={valor} /> : null}</div>
-        {exist ? (
-          <Alert className="exist" variant={'danger'}>
-            Já existe!
-          </Alert>
-        ) : null}
-        <ButtomList />
+        <ExistAlert />
+        <ButtomShow show={showList} setShow={setShowList} text={{ show: 'Ver Favoritos', hide: 'Ocutar Favoritos' }} />
         <ListFavorities />
-        <ButtomTabela />
-        <div>
-          <Procurar />
-        </div>
-        <div className="table">
-          <Table />
-        </div>
+        <ButtomShow show={showTable} setShow={setShowTable} text={{ show: 'Ver Tabela', hide: 'Ocutar Tabela' }} />
+        {showTable ? (
+          <ContainerTable />) : null}
       </div>
       <footer className="footer"></footer>
     </div>

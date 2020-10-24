@@ -8,7 +8,7 @@ export default function Cards() {
   return (
     <div className="cards">
       {autos.map((data) => (
-        <Card data={data} />
+        <Card data={data} key={`${data.AnoModelo}${data.Modelo}`} />
       ))}
     </div>
   );

@@ -1,10 +1,9 @@
-import React, { useContext, useState } from 'react';
+import React, { useContext } from 'react';
 import { Button } from 'react-bootstrap';
 import Context from '../context/context';
-import Cards from './cards/cards';
 
 export default function ButtomTabela() {
-  const { showTable, setShowTable, autos } = useContext(Context);
+  const { showTable, setShowTable } = useContext(Context);
   return (
     <div className="table">
       <Button variant={!showTable ? 'primary' : 'success'} onClick={() => setShowTable((s) => !s)}>
