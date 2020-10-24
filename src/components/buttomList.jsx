@@ -1,6 +1,5 @@
-import React, { useContext } from 'react';
+import React from 'react';
 import { Button } from 'react-bootstrap';
-import Context from '../context/context';
 
 export default function ButtomShow(props) {
   const { show, setShow, text } = props;

@@ -10,29 +10,36 @@ function updateState(event, stateFunc, option) {
 }
 
 export default function Marca() {
-  const { tipo, marca, setMarca, marcaOption, modelo, setModelo, setModeloOption } = useContext(
-    Context
-  );
+  const {
+    tipo,
+    marca,
+    setMarca,
+    marcaOption,
+    modelo,
+    setModelo,
+    setModeloOption,
+    setValoresChart,
+  } = useContext(Context);
   const [textBtn, setTextBtn] = useState('Marcas:');
   useEffect(() => setTextBtn('Marcas:'), [tipo]);
   useEffect(() => {
     if (!marcaOption) return null;
   }, [marcaOption]);
   useEffect(async () => {
-    console.log(typeof marca.value);
     if (marca.value === '' || typeof marca.value !== 'string') {
       await setModelo({ ...modelo, value: '' });
       await setModeloOption(null);
+      setValoresChart([]);
       return null;
     }
     apiModelos(tipo.value, marca.codigo).then((e) => {
-      console.log(typeof setModeloOption);
       setModeloOption(e.modelos);
     });
     return () => {
       setModelo({ ...modelo, value: '' });
       setModeloOption(null);
       setMarca((s) => ({ ...s, value: '' }));
+      setValoresChart([]);
     };
   }, [marca]);
   if (!marcaOption) return null;

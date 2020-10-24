@@ -31,12 +31,14 @@ export function Provider({ children }) {
   const [col, SetCol] = useState('AnoModelo');
   const [comp, SetComp] = useState('maior que');
   const [val, SetVal] = useState(undefined);
+  const [anosToChart, setAnosToChart] = useState([]);
+  const [valoresChart, setValoresChart] = useState([]);
   const add = () => {
     if (col === '' || comp === '' || !val) {
       return null;
     }
     const filtro = { column: col, comparison: comp, value: val };
-    setFilterByNumericValues(oldFilters => [...oldFilters, filtro]);
+    setFilterByNumericValues((oldFilters) => [...oldFilters, filtro]);
     SetCol('');
   };
   const context = {
@@ -78,6 +80,10 @@ export function Provider({ children }) {
     SetComp,
     val,
     SetVal,
+    anosToChart,
+    setAnosToChart,
+    valoresChart,
+    setValoresChart,
   };
 
   return <Context.Provider value={context}>{children}</Context.Provider>;

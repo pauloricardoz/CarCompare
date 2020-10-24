@@ -13,11 +13,12 @@ function updateState(event, stateFunc, option) {
 }
 
 function cleanInput(context) {
-  const { setAno, setValor, setAnoOption } = context;
+  const { setAno, setValor, setAnoOption, setValoresChart } = context;
 
   setAno({ index: 0, value: '', index: 0 });
   setValor(null);
   setAnoOption(null);
+  setValoresChart([]);
 }
 
 export default function Modelo() {
@@ -30,19 +31,19 @@ export default function Modelo() {
     setAno,
     setAnoOption,
     setValor,
+    setValoresChart,
   } = useContext(Context);
   const [textBtn, setTextBtn] = useState('Modelo:');
 
   useEffect(() => setTextBtn('Modelo:'), [marca]);
   useEffect(() => {
-    cleanInput({ setAno, setValor, setAnoOption });
+    cleanInput({ setAno, setValor, setAnoOption,setValoresChart });
     if (modelo.value === '') {
       setAno({ ...modelo, value: '' });
       setAnoOption(null);
       return null;
     }
     apiAnos(tipo.value, marca.codigo, modelo.codigo).then((e) => {
-      console.log(e);
       setAnoOption(e);
     });
   }, [modelo]);

@@ -4,26 +4,28 @@ import Context from '../../context/context';
 import { apiAnos, apiMarca, apiModelos, apiValor } from '../../services/apiFipe';
 
 function cleanInput(context) {
-  const { setValor } = context;
+  const { setValor, setValoresChart } = context;
   setValor(null);
+  setValoresChart([]);
 }
 function updateState(event, stateFunc) {
   stateFunc((state) => event.target.attributes[0].value);
 }
 
 export default function Ano() {
-  const { tipo, marca, modelo, ano, setAno, anoOption, setValor } = useContext(Context);
+  const { tipo, marca, modelo, ano, setAno, anoOption, setValor, setValoresChart } = useContext(
+    Context
+  );
   const [textBtn, setTextBtn] = useState('Ano:');
 
   useEffect(() => setTextBtn('Ano:'), [modelo]);
   useEffect(() => {
-    cleanInput({ setValor });
+    cleanInput({ setValor, setValoresChart });
     if (ano.value === '' || typeof ano !== 'string') {
       setValor(null);
       return null;
     }
     apiValor(tipo.value, marca.codigo, modelo.codigo, ano).then((e) => {
-      console.log(typeof setValor);
       setValor(e);
     });
   }, [ano]);
@@ -40,7 +42,6 @@ export default function Ano() {
           id="ano"
           onClick={(e) => {
             updateState(e, setAno);
-            console.log(e);
             setTextBtn(`${e.target.outerText}`);
           }}
         >

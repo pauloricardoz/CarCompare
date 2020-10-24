@@ -4,8 +4,6 @@
   padding: 0;
 }
 
-
-
 .App {
   background-color: #007bff35;
   display: flex;
@@ -80,7 +78,8 @@ div.card {
 .localizado {
   align-items: center;
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
+  justify-content: space-around;
   margin: 10px;
 }
 
@@ -174,7 +173,7 @@ tr:hover {
 .options-top {
   display: flex;
   justify-content: space-around;
-  align-items: center;
+  align-items: flex-start;
   flex-grow: 1;
 }
 .options-top > form {
@@ -228,11 +227,15 @@ tr:hover {
   width: 100%;
 }
 
-#label-remove{
+#label-remove {
   margin: 0 10px;
 }
 
-.no-favority{
+.no-favority {
   display: flex;
   justify-content: center;
+}
+
+div > canvas.chartjs-render-monitor  {
+  width: 700px;
 }

@@ -23,7 +23,7 @@ function cleanInput(context) {
   setMarca({ index: 0, value: '', index: 0 });
   setModelo({ index: 0, value: '', index: 0 });
   setAno({ index: 0, value: '', index: 0 });
-  setValor({ index: 0, value: '', index: 0 });
+  setValor(null);
   setMarcaOption(null);
   setModeloOption(null);
   setAnoOption(null);
